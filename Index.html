@@ -1,0 +1,48 @@
+<?php 
+// Start the session 
+session_start(); 
+// Check if the user has visited before by checking a cookie 
+if (isset($_COOKIE['visit_count'])) { 
+ // User has visited before, increment the visit count 
+ $visit_count = $_COOKIE['visit_count'] + 1; 
+ $last_visited = $_COOKIE['last_visited']; // Retrieve last visit time 
+} else { 
+ // First time visit 
+ $visit_count = 1; 
+ $last_visited = "This is your first visit."; 
+} 
+// Set the new values for the cookies 
+setcookie('visit_count', $visit_count, time() + (86400 * 30)); // Cookie expires in 30 dayssetcookie('last_visited', date("Y-m-d H:i:s"), time() + (86400 * 30)); // Store current time for 
+
+next visit 
+
+?> 
+
+<!DOCTYPE html> 
+
+<html lang="en"> 
+
+<head> 
+
+ <meta charset="UTF-8"> 
+
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+ <title>Track User Visits</title> 
+
+</head> 
+
+<body> 
+
+ <h1>Welcome to the PHP User Visit Tracker</h1> 
+
+ <p><?php echo "You have visited this site <strong>{$visit_count}</strong> times."; 
+
+?></p> 
+
+ <p><?php echo "Your last visit was on: <strong>{$last_visited}</strong>"; ?></p>
+  
+
+</body> 
+
+</html>
